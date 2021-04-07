@@ -5,13 +5,13 @@ use plants;
 CREATE TABLE category
 (
     id            INT AUTO_INCREMENT primary key,
-    category_NAME VARCHAR(20)
+    category_name VARCHAR(20)
 );
 CREATE TABLE plants
 (
     id            INT AUTO_INCREMENT primary key,
     plant_name    VARCHAR(40),
-    POT_DIMENSION INT,
+    pot_dimension INT,
     category_id   INT,
     price         INT
 );
@@ -21,16 +21,16 @@ ALTER TABLE plants
 CREATE TABLE clients
 (
     id               INT AUTO_INCREMENT primary key,
-    client_NAME      VARCHAR(20),
-    DATE_ACCOUNT     DATE default (NOW()),
-    client_MAIL      VARCHAR(320),
-    DELIVERY_ADDRESS VARCHAR(400)
+    client_name      VARCHAR(20),
+    date_account     date default (NOW()),
+    client_mail      VARCHAR(320),
+    delivery_address VARCHAR(400)
 );
 CREATE TABLE orders
 (
     order_NO  INT AUTO_INCREMENT primary key,
-    order_DATE     DATE default (NOW()),
-    delivery_date  DATE DEFAULT (order_DATE+INTERVAL 1 DAY ),
+    order_date     date default (NOW()),
+    delivery_date  date DEFAULT (order_date+INTERVAL 1 DAY ),
     client_id INT
 );
 ALTER TABLE orders
@@ -40,7 +40,8 @@ CREATE TABLE orders_with_plants
 (
     nr_crt  INT AUTO_INCREMENT primary key,
     order_id  INT,
-    plant_id  INT
+    plant_id  INT,
+    plant_number INT
 );
 ALTER TABLE orders_with_plants
     ADD FOREIGN KEY (order_id) REFERENCES orders (order_NO);
@@ -80,9 +81,9 @@ VALUES (1, DEFAULT, DEFAULT, 1),
        (DEFAULT, '2020-06-02', DEFAULT, 2),
        (DEFAULT, '2020-06-02', DEFAULT, 2);
 INSERT INTO orders_with_plants
-VALUES (1, 1, 1  ),
-       (DEFAULT, 1, 4  ),
-       (DEFAULT, 2, 10  ),
-       (DEFAULT, 2, 12  ),
-       (DEFAULT, 4, 3  ),
-       (DEFAULT, 3, 14  );
+VALUES (1, 1, 1, 2 ),
+       (DEFAULT, 1, 4, 1 ),
+       (DEFAULT, 2, 10,1 ),
+       (DEFAULT, 2, 12,1 ),
+       (DEFAULT, 4, 3 ,1 ),
+       (DEFAULT, 3, 14 ,1 );
