@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @EntityListeners(AuditingEntityListener.class)
 @Data
@@ -31,6 +33,11 @@ public class PlantEntity {
     private CategoryEntity categoryEntity;
 
     private Integer price;
-
+    @OneToMany(
+            mappedBy = "plantEntity",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<OrdersWithPlantsEntity> orders = new ArrayList<>();
 
 }

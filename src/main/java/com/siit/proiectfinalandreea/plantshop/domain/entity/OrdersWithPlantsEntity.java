@@ -1,37 +1,45 @@
 package com.siit.proiectfinalandreea.plantshop.domain.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 
 @EntityListeners(AuditingEntityListener.class)
-@Data
+@EqualsAndHashCode
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "orders_with_plants")
 public class OrdersWithPlantsEntity {
-    @Column(name = "nr_crt")
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer nrCrt;
+    @Column(name = "nr_crt")
+    private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_id", referencedColumnName = "oreder_NO")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
     private OrderEntity orderEntity;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "plant_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="plant_id")
     private PlantEntity plantEntity;
 
-    @Column(name = "plant_number")
+    @Column(name = "number_of_plants")
     private Integer numberOfPlants;
 
+    public OrdersWithPlantsEntity() {
+    }
+
+    public OrdersWithPlantsEntity(OrderEntity orderEntity, PlantEntity plantEntity, Integer numberOfPlants) {
+        this.orderEntity = orderEntity;
+        this.plantEntity = plantEntity;
+        this.numberOfPlants = numberOfPlants;
+    }
 
 }

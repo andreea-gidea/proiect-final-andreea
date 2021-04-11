@@ -41,7 +41,7 @@ CREATE TABLE orders_with_plants
     nr_crt  INT AUTO_INCREMENT primary key,
     order_id  INT,
     plant_id  INT,
-    plant_number INT
+    number_of_plants INT
 );
 ALTER TABLE orders_with_plants
     ADD FOREIGN KEY (order_id) REFERENCES orders (order_NO);
@@ -82,8 +82,8 @@ VALUES (1, DEFAULT, DEFAULT, 1),
        (DEFAULT, '2020-06-02', DEFAULT, 2);
 INSERT INTO orders_with_plants
 VALUES (1, 1, 1, 2 ),
-       (DEFAULT, 1, 4, 1 ),
-       (DEFAULT, 2, 10,1 ),
-       (DEFAULT, 2, 12,1 ),
-       (DEFAULT, 4, 3 ,1 ),
-       (DEFAULT, 3, 14 ,1 );
+       (default, 1, 4, 1 ),
+       (default,2, 10,1 ),
+       (default,2, 12,1 ),
+       (default, 4, 3 ,1 ),
+       (default, 3, 14 ,1 );
