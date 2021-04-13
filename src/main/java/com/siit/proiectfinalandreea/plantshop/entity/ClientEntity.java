@@ -1,4 +1,4 @@
-package com.siit.proiectfinalandreea.plantshop.domain.entity;
+package com.siit.proiectfinalandreea.plantshop.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,8 +8,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @EntityListeners(AuditingEntityListener.class)
 @Data
@@ -17,16 +15,23 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "category")
-public class CategoryEntity {
-
+@Table(name = "clients")
+public class ClientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "category_name")
-    private String categoryName;
+    @Column(name = "client_name")
+    private String clientName;
 
+    @Column(name = "date_account")
+    @Builder.Default
+    private LocalDate dateCreatedAcc = LocalDate.now();
 
+    @Column(name = "client_mail")
+    private String clientMail;
+
+    @Column(name = "delivery_address")
+    private String addressOfDelivery;
 
 }

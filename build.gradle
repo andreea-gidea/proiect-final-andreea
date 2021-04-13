@@ -19,16 +19,24 @@ repositories {
 }
 
 dependencies {
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    runtimeOnly 'mysql:mysql-connector-java'
+
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'mysql:mysql-connector-java'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
     // https://mvnrepository.com/artifact/org.mapstruct/mapstruct
     implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.4.2.Final'
     annotationProcessor "org.mapstruct:mapstruct-processor:1.4.2.Final"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.19.0'
+// https://mvnrepository.com/artifact/junit/junit
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+
+
 
 }
 

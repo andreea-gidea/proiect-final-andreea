@@ -1,4 +1,4 @@
-package com.siit.proiectfinalandreea.plantshop.domain.model;
+package com.siit.proiectfinalandreea.plantshop.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

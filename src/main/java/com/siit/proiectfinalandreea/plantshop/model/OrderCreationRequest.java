@@ -1,4 +1,4 @@
-package com.siit.proiectfinalandreea.plantshop.domain.model;
+package com.siit.proiectfinalandreea.plantshop.model;
 
 import lombok.Data;
 

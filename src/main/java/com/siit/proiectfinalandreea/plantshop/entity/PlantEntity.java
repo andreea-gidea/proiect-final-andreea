@@ -1,5 +1,6 @@
-package com.siit.proiectfinalandreea.plantshop.domain.entity;
+package com.siit.proiectfinalandreea.plantshop.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,11 +34,13 @@ public class PlantEntity {
     private CategoryEntity categoryEntity;
 
     private Integer price;
+
     @OneToMany(
-            mappedBy = "plantEntity",
+            mappedBy = "plant",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @JsonIgnore
     private List<OrdersWithPlantsEntity> orders = new ArrayList<>();
 
 }

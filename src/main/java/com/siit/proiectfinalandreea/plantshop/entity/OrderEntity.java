@@ -1,4 +1,4 @@
-package com.siit.proiectfinalandreea.plantshop.domain.entity;
+package com.siit.proiectfinalandreea.plantshop.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @EntityListeners(AuditingEntityListener.class)
 @Data
@@ -34,22 +33,19 @@ public class OrderEntity {
 
     @Column(name = "delivery_date")
     @Builder.Default
-    private LocalDate dateOfDelivery = LocalDate.now().plusDays(1);
+    private LocalDate shippingDate = LocalDate.now().plusDays(1);
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private ClientEntity clientEntity;
 
-    @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL)
-    private List<OrdersWithPlantsEntity> orders = new ArrayList<>();
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrdersWithPlantsEntity> plants = new ArrayList<>();
 
     @CreatedDate
     private LocalDateTime createdAt;
 
     @LastModifiedDate
     private LocalDateTime modifiedAt;
-
-
-
 
 }

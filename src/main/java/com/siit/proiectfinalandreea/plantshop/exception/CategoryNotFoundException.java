@@ -1,4 +1,4 @@
-package com.siit.proiectfinalandreea.plantshop.domain.exception;
+package com.siit.proiectfinalandreea.plantshop.exception;
 
 public class CategoryNotFoundException extends RuntimeException {
 

@@ -1,10 +1,9 @@
-package com.siit.proiectfinalandreea.plantshop.domain.entity;
+package com.siit.proiectfinalandreea.plantshop.entity;
 
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 
 @EntityListeners(AuditingEntityListener.class)
@@ -24,11 +23,11 @@ public class OrdersWithPlantsEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
-    private OrderEntity orderEntity;
+    private OrderEntity order;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="plant_id")
-    private PlantEntity plantEntity;
+    private PlantEntity plant;
 
     @Column(name = "number_of_plants")
     private Integer numberOfPlants;
@@ -37,8 +36,8 @@ public class OrdersWithPlantsEntity {
     }
 
     public OrdersWithPlantsEntity(OrderEntity orderEntity, PlantEntity plantEntity, Integer numberOfPlants) {
-        this.orderEntity = orderEntity;
-        this.plantEntity = plantEntity;
+        this.order = orderEntity;
+        this.plant = plantEntity;
         this.numberOfPlants = numberOfPlants;
     }
 
