@@ -5,7 +5,8 @@ import lombok.Data;
 @Data
 public class PlantInfo {
 
-    private Integer PlantId;
+    private Integer plantId;
 
     private Integer quantity;
+
 }

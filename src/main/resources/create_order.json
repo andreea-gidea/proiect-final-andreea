@@ -1,0 +1,14 @@
+{
+  "clientID": 3,
+
+  "plants": [
+    {
+      "id": 4,
+      "numberOfPlants": 3
+      },
+    {
+      "id": 5,
+      "numberOfPlants": 1
+    }
+    ]
+}

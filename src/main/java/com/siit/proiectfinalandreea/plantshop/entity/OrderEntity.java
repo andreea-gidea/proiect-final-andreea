@@ -37,7 +37,7 @@ public class OrderEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
-    private ClientEntity clientEntity;
+    private ClientEntity client;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrdersWithPlantsEntity> plants = new ArrayList<>();

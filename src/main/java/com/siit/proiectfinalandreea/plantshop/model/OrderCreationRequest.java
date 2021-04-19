@@ -8,8 +8,9 @@ import java.util.List;
 
 public class OrderCreationRequest {
 
+    private Integer clientId;
+
     private List<PlantInfo> plantInfos;
 
-    private String title;//vezi daca ai nevoie de campul asta
 
 }

@@ -22,7 +22,7 @@ public class CustomExceptionHandler {
 
 
 
-    @ExceptionHandler({ClientNotFoundException.class, CategoryNotFoundException.class, OrderNotFoundException.class})
+    @ExceptionHandler({ClientNotFoundException.class, CategoryNotFoundException.class, OrderNotFoundException.class, PlantNotFoundException.class})
     public ResponseEntity<ErrorResponse> notFound(HttpServletResponse response, Exception ex) {
         log.error(ex.getMessage(), ex);
         return buildErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND);

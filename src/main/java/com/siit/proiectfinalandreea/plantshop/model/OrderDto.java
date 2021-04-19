@@ -18,7 +18,7 @@ public class OrderDto {
 
     private LocalDate dateOfDelivery = LocalDate.now().plusDays(1);
 
-    private ClientDto clientDto;
+    private ClientDto client;
 
     private List<OrdersWithPlantsDto> plants = new ArrayList<>();
 

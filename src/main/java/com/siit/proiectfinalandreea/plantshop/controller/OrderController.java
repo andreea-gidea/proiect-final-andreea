@@ -1,15 +1,11 @@
 package com.siit.proiectfinalandreea.plantshop.controller;
 
-import com.siit.proiectfinalandreea.plantshop.entity.CategoryEntity;
-import com.siit.proiectfinalandreea.plantshop.entity.OrderEntity;
+
+import com.siit.proiectfinalandreea.plantshop.model.OrderCreationRequest;
 import com.siit.proiectfinalandreea.plantshop.model.OrderDto;
-import com.siit.proiectfinalandreea.plantshop.service.CategoryService;
 import com.siit.proiectfinalandreea.plantshop.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,9 +21,15 @@ public class OrderController {
     public List<OrderDto> getOrders() {
         return orderService.getAllOrders();
     }
-    @GetMapping("/{clientID}")
-    public OrderDto getOrder(@PathVariable(name = "clientID") Integer clientID){
-        return orderService.getOrder(clientID);
+
+    @GetMapping("/{orderID}")
+    public OrderDto getOrder(@PathVariable(name = "orderID") Integer orderID){
+        return orderService.getOrder(orderID);
+    }
+
+    @PostMapping
+    public OrderDto createOrder(@RequestBody OrderCreationRequest orderCreationRequest){
+        return orderService.createOrder(orderCreationRequest);
     }
 
 

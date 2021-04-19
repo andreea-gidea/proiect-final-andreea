@@ -5,10 +5,7 @@ import com.siit.proiectfinalandreea.plantshop.entity.ClientEntity;
 import com.siit.proiectfinalandreea.plantshop.model.ClientDto;
 import com.siit.proiectfinalandreea.plantshop.service.ClientService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,10 +21,14 @@ public class ClientController {
     public List<ClientEntity> getCategories() {
         return clientService.getClients();
     }
+
     @GetMapping("/{clientID}")
     public ClientEntity get(@PathVariable(name = "clientID") Integer clientID) {
-
         return clientService.getClient(clientID);
+    }
+    @PostMapping()
+    public ClientDto create(@RequestBody ClientDto clientDto){
+        return clientService.createClient(clientDto);
     }
 
 }
