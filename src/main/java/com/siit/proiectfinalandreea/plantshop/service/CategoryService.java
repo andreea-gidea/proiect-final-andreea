@@ -2,10 +2,10 @@ package com.siit.proiectfinalandreea.plantshop.service;
 
 import com.siit.proiectfinalandreea.plantshop.entity.CategoryEntity;
 import com.siit.proiectfinalandreea.plantshop.exception.CategoryNotFoundException;
-import com.siit.proiectfinalandreea.plantshop.exception.ClientNotFoundException;
+import com.siit.proiectfinalandreea.plantshop.mapper.CategoryMapper;
+import com.siit.proiectfinalandreea.plantshop.model.CategoryDto;
 import com.siit.proiectfinalandreea.plantshop.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,13 +15,14 @@ import java.util.List;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
 
-    public List<CategoryEntity> getCategories() {
-        return categoryRepository.findAll();
+    public List<CategoryDto> getCategories() {
+        return categoryMapper.mapListEntityToListDto(categoryRepository.findAll());
     }
 
-    public CategoryEntity getCategory(Integer categoryId) {
-        return categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException("No such id for a category  "+categoryId));
+    public CategoryDto getCategory(Integer categoryId) {
+        return categoryMapper.mapEntityToDto(categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException("No such id for a category  "+categoryId)));
     }
 
 

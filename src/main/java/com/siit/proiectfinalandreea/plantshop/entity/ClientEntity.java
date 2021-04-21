@@ -12,7 +12,6 @@ import java.time.LocalDate;
 
 @EntityListeners(AuditingEntityListener.class)
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

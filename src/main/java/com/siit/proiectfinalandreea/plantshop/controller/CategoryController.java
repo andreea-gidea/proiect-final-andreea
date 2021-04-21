@@ -2,6 +2,7 @@ package com.siit.proiectfinalandreea.plantshop.controller;
 
 import com.siit.proiectfinalandreea.plantshop.entity.CategoryEntity;
 
+import com.siit.proiectfinalandreea.plantshop.model.CategoryDto;
 import com.siit.proiectfinalandreea.plantshop.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 
@@ -21,13 +22,13 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping()
-    public List<CategoryEntity> getCategories() {
+    public List<CategoryDto> getCategories() {
         return categoryService.getCategories();
     }
     @GetMapping("/{categoryId}")
-    public CategoryEntity get(@PathVariable(name = "categoryId") Integer categoryId) {
-
+    public CategoryDto get(@PathVariable(name = "categoryId") Integer categoryId) {
         return categoryService.getCategory(categoryId);
+
     }
 
 }

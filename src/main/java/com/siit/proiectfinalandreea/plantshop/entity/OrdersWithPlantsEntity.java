@@ -10,7 +10,6 @@ import javax.persistence.*;
 @EqualsAndHashCode
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @Entity
 @Table(name = "orders_with_plants")
