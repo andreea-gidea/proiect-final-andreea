@@ -26,6 +26,6 @@ public class OrderDto {
 
     private LocalDateTime modifiedAt;
 
-//    private Integer totalPrice;
+    private Integer totalPrice;
 
 }

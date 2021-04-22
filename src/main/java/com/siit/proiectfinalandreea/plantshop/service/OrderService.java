@@ -3,13 +3,10 @@ package com.siit.proiectfinalandreea.plantshop.service;
 
 import com.siit.proiectfinalandreea.plantshop.entity.OrderEntity;
 import com.siit.proiectfinalandreea.plantshop.entity.OrdersWithPlantsEntity;
-import com.siit.proiectfinalandreea.plantshop.entity.PlantEntity;
 import com.siit.proiectfinalandreea.plantshop.exception.OrderNotFoundException;
 import com.siit.proiectfinalandreea.plantshop.exception.PlantNotFoundException;
 import com.siit.proiectfinalandreea.plantshop.mapper.OrderMapper;
-import com.siit.proiectfinalandreea.plantshop.model.OrderCreationRequest;
-import com.siit.proiectfinalandreea.plantshop.model.OrderDto;
-import com.siit.proiectfinalandreea.plantshop.model.OrdersWithPlantsDto;
+import com.siit.proiectfinalandreea.plantshop.model.*;
 import com.siit.proiectfinalandreea.plantshop.repository.ClientRepository;
 import com.siit.proiectfinalandreea.plantshop.repository.OrderRepository;
 import com.siit.proiectfinalandreea.plantshop.repository.PlantRepository;
@@ -29,22 +26,35 @@ public class OrderService {
     private final ClientRepository clientRepository;
 
     public List<OrderDto> getAllOrders() {
-        return orderMapper.mapListEntityToListDto(orderRepository.findAll());
+        List<OrderEntity> orders = orderRepository.findAll();
+        List<OrderDto> ordersDTO = orderMapper.mapListEntityToListDto(orders);
+        for(OrderDto orderDto:ordersDTO){
+            List<OrdersWithPlantsDto> ordersWithPlantsDtos = orderDto.getPlants();
+
+            Integer totalPrice=0;
+            for(OrdersWithPlantsDto orderLine:ordersWithPlantsDtos){
+                totalPrice=totalPrice+((orderLine.getPlant().getPrice()*orderLine.getNumberOfPlants()));
+            }
+            orderDto.setTotalPrice(totalPrice);
+        }
+        return ordersDTO;
     }
 
     public OrderDto getOrder(Integer orderId) {
 
-//        OrderEntity order = orderRepository.findById(orderId).orElseThrow(() -> new OrderNotFoundException("No order for given Id  " + orderId));
-//        List<OrdersWithPlantsEntity> ordersWithPlantsEntities = order.getPlants();
-//
-//        Integer totalPrice=0;
-//        for(int i=0;i<ordersWithPlantsEntities.size();i++){
-//            totalPrice=totalPrice+1;
-//        }
-//        OrderDto orderDto = orderMapper.mapEntityToDto(order);
-//
-//        orderDto.setTotalPrice(totalPrice);
-        return orderMapper.mapEntityToDto(orderRepository.findById(orderId).orElseThrow(() -> new OrderNotFoundException("No order for given Id  " + orderId)));
+        OrderEntity order = orderRepository.findById(orderId).orElseThrow(() -> new OrderNotFoundException("No order for given Id  " + orderId));
+
+        OrderDto orderDto = orderMapper.mapEntityToDto(order);
+
+        List<OrdersWithPlantsDto> ordersWithPlantsDtos = orderDto.getPlants();
+
+        Integer totalPrice=0;
+        for(OrdersWithPlantsDto orderLine:ordersWithPlantsDtos){
+            totalPrice=totalPrice+((orderLine.getPlant().getPrice()*orderLine.getNumberOfPlants()));
+        }
+
+        orderDto.setTotalPrice(totalPrice);
+        return orderDto;
     }
 
     public OrderDto createOrder(OrderCreationRequest orderCreationRequest) {
@@ -57,4 +67,31 @@ public class OrderService {
 
         return orderMapper.mapEntityToDto(orderRepository.save(order));
     }
+    public OrderDto addToOrder(OrderAddMoreItemsRequest orderAddMoreItemsRequest) {
+
+        OrderEntity order = orderRepository.findById(orderAddMoreItemsRequest.getOrderId()).orElseThrow(() -> new OrderNotFoundException("No order found for ID  " + orderAddMoreItemsRequest.getOrderId()));
+        List<PlantInfo> plantInfos = orderAddMoreItemsRequest.getPlantInfos();
+        List<OrdersWithPlantsEntity>plantsAlreadyInOrder=order.getPlants();
+        List<OrdersWithPlantsEntity>plantToBeAdded=new ArrayList<>();
+        for(PlantInfo p:plantInfos){
+            boolean isPlantAllreadyInOrder=false;
+            int whereIsThePlant=0;
+            for(OrdersWithPlantsEntity o:plantsAlreadyInOrder) {
+                if (p.getPlantId()==(o.getPlant().getId())) {
+                    isPlantAllreadyInOrder = true;
+                    whereIsThePlant = plantsAlreadyInOrder.indexOf(o);
+                }
+            }
+            if(isPlantAllreadyInOrder){
+                plantsAlreadyInOrder.get(whereIsThePlant).setNumberOfPlants(plantsAlreadyInOrder.get(whereIsThePlant).getNumberOfPlants()+p.getQuantity());
+            }
+            else {
+                plantToBeAdded.add(new OrdersWithPlantsEntity(order, plantRepository.findById(p.getPlantId()).orElseThrow(() -> new PlantNotFoundException("No such id for a plant  " + p.getPlantId())), p.getQuantity()));
+            }
+            order.getPlants().addAll(plantToBeAdded);
+        }
+
+        return orderMapper.mapEntityToDto(orderRepository.save(order));
+    }
+
 }

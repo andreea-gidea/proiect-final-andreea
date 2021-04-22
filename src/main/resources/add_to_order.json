@@ -1,0 +1,14 @@
+{
+  "orderId": 1,
+
+  "plantInfos": [
+    {
+      "plantId": 4,
+      "quantity": 1
+    },
+    {
+      "plantId": 11,
+      "quantity": 1
+    }
+  ]
+}

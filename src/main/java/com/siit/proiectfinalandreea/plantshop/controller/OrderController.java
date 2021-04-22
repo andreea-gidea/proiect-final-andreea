@@ -1,6 +1,7 @@
 package com.siit.proiectfinalandreea.plantshop.controller;
 
 
+import com.siit.proiectfinalandreea.plantshop.model.OrderAddMoreItemsRequest;
 import com.siit.proiectfinalandreea.plantshop.model.OrderCreationRequest;
 import com.siit.proiectfinalandreea.plantshop.model.OrderDto;
 import com.siit.proiectfinalandreea.plantshop.service.OrderService;
@@ -29,6 +30,10 @@ public class OrderController {
     @PostMapping
     public OrderDto createOrder(@RequestBody OrderCreationRequest orderCreationRequest){
         return orderService.createOrder(orderCreationRequest);
+    }
+    @PutMapping
+    public OrderDto addToOrder(@RequestBody OrderAddMoreItemsRequest oderAddMoreItemsRequest){
+        return orderService.addToOrder(oderAddMoreItemsRequest);
     }
 
 
