@@ -1,7 +1,7 @@
 package com.siit.proiectfinalandreea.plantshop.controller;
 
 
-import com.siit.proiectfinalandreea.plantshop.model.OrderAddMoreItemsRequest;
+import com.siit.proiectfinalandreea.plantshop.model.OrderAddMoreItemsOrRemoveRequest;
 import com.siit.proiectfinalandreea.plantshop.model.OrderCreationRequest;
 import com.siit.proiectfinalandreea.plantshop.model.OrderDto;
 import com.siit.proiectfinalandreea.plantshop.service.OrderService;
@@ -32,9 +32,15 @@ public class OrderController {
         return orderService.createOrder(orderCreationRequest);
     }
     @PutMapping
-    public OrderDto addToOrder(@RequestBody OrderAddMoreItemsRequest oderAddMoreItemsRequest){
+    public OrderDto addToOrder(@RequestBody OrderAddMoreItemsOrRemoveRequest oderAddMoreItemsRequest){
         return orderService.addToOrder(oderAddMoreItemsRequest);
     }
-
-
+    @DeleteMapping
+    public void deleteFromOrder(@RequestBody OrderAddMoreItemsOrRemoveRequest orderAddMoreItemsOrRemoveRequest){
+        orderService.deleteFromOrder(orderAddMoreItemsOrRemoveRequest);
+    }
+    @DeleteMapping("/{orderId}")
+    public void deletePost(@PathVariable(name = "orderId") Integer orderId){
+        orderService.deleteOrder(orderId);
+    }
 }

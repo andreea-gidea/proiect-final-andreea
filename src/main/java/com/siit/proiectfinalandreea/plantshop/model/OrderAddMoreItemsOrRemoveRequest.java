@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 
-public class OrderAddMoreItemsRequest {
+public class OrderAddMoreItemsOrRemoveRequest {
 
     private Integer orderId;
 
