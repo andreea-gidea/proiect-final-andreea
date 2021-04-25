@@ -4,6 +4,7 @@ import com.siit.proiectfinalandreea.plantshop.entity.CategoryEntity;
 import com.siit.proiectfinalandreea.plantshop.exception.CategoryNotFoundException;
 import com.siit.proiectfinalandreea.plantshop.mapper.CategoryMapper;
 import com.siit.proiectfinalandreea.plantshop.model.CategoryDto;
+import com.siit.proiectfinalandreea.plantshop.model.CategoryDtoCreateRequest;
 import com.siit.proiectfinalandreea.plantshop.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,11 @@ public class CategoryService {
     public CategoryDto getCategory(Integer categoryId) {
         return categoryMapper.mapEntityToDto(categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException("No such id for a category  "+categoryId)));
     }
+    public CategoryDto createCategory(CategoryDtoCreateRequest categoryDto) {
+        CategoryEntity categoryEntity = categoryMapper.mapDtoCreateRequestToEntity(categoryDto);
+        CategoryEntity savedEntity = categoryRepository.save(categoryEntity);
 
+        return categoryMapper.mapEntityToDto(savedEntity);
+    }
 
 }

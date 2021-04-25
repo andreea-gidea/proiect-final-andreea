@@ -1,17 +1,13 @@
 package com.siit.proiectfinalandreea.plantshop.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
-
+import javax.validation.constraints.NotBlank;
 
 @Data
-@AllArgsConstructor
+public class CategoryDtoCreateRequest {
 
-public class CategoryDto {
-
-    private int id;
-
+    @NotBlank
     private String categoryName;
 
 }

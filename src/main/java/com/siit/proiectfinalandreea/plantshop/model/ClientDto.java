@@ -10,6 +10,7 @@ public class ClientDto {
     private int id;
     @NotBlank
     private String clientName;
+
     private LocalDate dateCreatedAcc;
     @NotBlank
     private String clientMail;
