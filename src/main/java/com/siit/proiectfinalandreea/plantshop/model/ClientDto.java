@@ -1,11 +1,15 @@
 package com.siit.proiectfinalandreea.plantshop.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
-@Data
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ClientDto {
     private int id;
     @NotBlank

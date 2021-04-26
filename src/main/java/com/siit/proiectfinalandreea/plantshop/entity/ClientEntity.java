@@ -12,6 +12,7 @@ import java.time.LocalDate;
 
 @EntityListeners(AuditingEntityListener.class)
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -25,8 +26,9 @@ public class ClientEntity {
     private String clientName;
 
     @Column(name = "date_account")
-    @CreatedDate
-    private LocalDate dateCreatedAcc;
+//    @CreatedDate
+    @Builder.Default
+    private LocalDate dateCreatedAcc=LocalDate.now();
 
     @Column(name = "client_mail")
     private String clientMail;
